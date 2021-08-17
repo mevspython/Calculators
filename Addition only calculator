@@ -1,0 +1,81 @@
+#import tkinter
+from tkinter import *
+#initialize tkinter as root
+root = Tk()
+#give the window a title
+root.title("Simple Calculator")
+
+#creating entry field
+main_entryfield = Entry(root, width=35, borderwidth=5)
+#we are building the entry field to span
+#placing main_entryfield on screen using grid feature
+#row and column or 0,0 in reference to a grid, so upper left corner
+#columnspan is 
+main_entryfield.grid(row=0, column=0, columnspan=3, padx=10, pady= 10)
+
+def button_click(number):
+    #main_entryfield.delete(0, END)
+    current_entry = main_entryfield.get()
+    main_entryfield.delete(0, END)
+    main_entryfield.insert(0, str(current_entry) + str(number))
+
+#clear button function
+def button_clear():
+    main_entryfield.delete(0, END)
+
+#add button function , so when the add button is selected, it will store the previously entered numbers
+def button_add():
+    first_number_entered = main_entryfield.get()
+    global f_num
+    #this assigns the first entered number into a variable f_num under the saved cache for first_number_enter
+    f_num = int(first_number_entered)
+    #this will clear the text box for the second entry in the main entry window
+    main_entryfield.delete(0, END)
+
+#setting the equal function
+def button_equal():
+    second_number_entered = main_entryfield.get()
+    main_entryfield.delete(0, END)
+    main_entryfield.insert(0, f_num + int(second_number_entered))
+
+
+#creating button
+button_1 = Button(root, text="1", padx=40, pady=20, command=lambda: button_click(1))
+button_2 = Button(root, text="2", padx=40, pady=20, command=lambda: button_click(2))
+button_3 = Button(root, text="3", padx=40, pady=20, command=lambda: button_click(3))
+button_4 = Button(root, text="4", padx=40, pady=20, command=lambda: button_click(4))
+button_5 = Button(root, text="5", padx=40, pady=20, command=lambda: button_click(5))
+button_6 = Button(root, text="6", padx=40, pady=20, command=lambda: button_click(6))
+button_7 = Button(root, text="7", padx=40, pady=20, command=lambda: button_click(7))
+button_8 = Button(root, text="8", padx=40, pady=20, command=lambda: button_click(8))
+button_9 = Button(root, text="9", padx=40, pady=20, command=lambda: button_click(9))
+button_0 = Button(root, text="0", padx=40, pady=20, command=lambda: button_click(0))
+#having to create a diff function for add button
+button_add = Button(root, text="+", padx=39, pady=20, command= button_add)
+button_equal = Button(root, text="=", padx=91, pady=20, command= button_equal)
+#having to create a diff function for clear button
+button_clear = Button(root, text="Clear", padx=79, pady=20, command=button_clear)
+
+
+# putting buttons on the screen
+button_1.grid(row=3, column=0)
+button_2.grid(row=3, column=1)
+button_3.grid(row=3, column=2)
+
+button_4.grid(row=2, column=0)
+button_5.grid(row=2, column=1)
+button_6.grid(row=2, column=2)
+
+button_7.grid(row=1, column=0)
+button_8.grid(row=1, column=1)
+button_9.grid(row=1, column=2)
+
+button_0.grid(row=4, column=0)
+
+button_clear.grid(row=4, column=1, columnspan=2)
+button_equal.grid(row=5, column=1, columnspan=2)
+button_add.grid(row=5, column=0)
+
+
+#give the main loop for window
+root.mainloop()
